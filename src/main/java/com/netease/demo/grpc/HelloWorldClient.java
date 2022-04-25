@@ -21,7 +21,7 @@ public class HelloWorldClient {
 
     private final ManagedChannel channel;
 
-    private final pers.xin.demo.HelloServiceGrpc.HelloServiceBlockingStub blockingStub;
+    private final helloworld.GreeterGrpc.GreeterBlockingStub blockingStub;
 
 
     /**
@@ -51,7 +51,7 @@ public class HelloWorldClient {
 
         this.channel = channel;
 
-        blockingStub = pers.xin.demo.HelloServiceGrpc.newBlockingStub(channel);
+        blockingStub = helloworld.GreeterGrpc.newBlockingStub(channel);
 
     }
 
@@ -71,13 +71,13 @@ public class HelloWorldClient {
 
         logger.info("Will try to greet " + name + " ...");
 
-        pers.xin.demo.HelloRequest request = pers.xin.demo.HelloRequest.newBuilder().setName(name).build();
+        helloworld.HelloRequest request = helloworld.HelloRequest.newBuilder().setName(name).build();
 
-        pers.xin.demo.HelloReply response;
+        helloworld.HelloReply response;
 
         try {
 
-            response = blockingStub.greeting(request);
+            response = blockingStub.sayHello(request);
 
         } catch (StatusRuntimeException e) {
 

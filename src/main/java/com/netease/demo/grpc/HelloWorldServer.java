@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 
 /**
- * Server that manages startup/shutdown of a {@code HelloService} server.
+ * Server that manages startup/shutdown of a {@code Greeter} server.
  */
 
 public class HelloWorldServer {
@@ -30,7 +30,7 @@ public class HelloWorldServer {
 
         server = ServerBuilder.forPort(port)
 
-                .addService((BindableService) new HelloServiceImpl())
+                .addService((BindableService) new GreeterImpl())
 
                 .build()
 
@@ -100,14 +100,14 @@ public class HelloWorldServer {
     }
 
 
-    static class HelloServiceImpl extends pers.xin.demo.HelloServiceGrpc.HelloServiceImplBase {
+    static class GreeterImpl extends helloworld.GreeterGrpc.GreeterImplBase {
 
 
         @Override
 
-        public void greeting(pers.xin.demo.HelloRequest req, StreamObserver<pers.xin.demo.HelloReply> responseObserver) {
+        public void sayHello(helloworld.HelloRequest req, StreamObserver<helloworld.HelloReply> responseObserver) {
 
-            pers.xin.demo.HelloReply reply = pers.xin.demo.HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
+            helloworld.HelloReply reply = helloworld.HelloReply.newBuilder().setMessage("Hello " + req.getName()).build();
 
             responseObserver.onNext(reply);
 
